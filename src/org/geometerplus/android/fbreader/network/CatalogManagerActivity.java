@@ -154,7 +154,7 @@ public class CatalogManagerActivity extends ListActivity {
 		}
 	}
 
-	private class CatalogsListAdapter extends ArrayAdapter<Item> {
+	private class CatalogsListAdapter extends ArrayAdapter<Item> implements DragSortListView.DropListener, DragSortListView.RemoveListener {
 		private CoverManager myCoverManager;
 
 		public CatalogsListAdapter() {
@@ -209,6 +209,31 @@ public class CatalogManagerActivity extends ListActivity {
 				});
 			}
 			return view;
+		}
+
+		// method from DragSortListView.DropListener
+		public void drop(int from, int to) {
+			to = Math.max(to, 1);
+			if (from == to) {
+				return;
+			}
+			final Item item = getItem(from);
+			if (item instanceof CatalogItem) {
+				remove(item);
+				insert(item, to);
+				//reCheckAll(item, to);
+				getListView().moveCheckState(from, to);
+				setResultIds(item, to);
+			}
+		}
+
+		// method from DragSortListView.RemoveListener
+		public void remove(int which) {
+			final Item item = getItem(which);
+			if (item instanceof CatalogItem) {
+				remove(item);
+				getListView().removeCheckState(which);
+			}
 		}
 	}
 }
