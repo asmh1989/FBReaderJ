@@ -439,6 +439,7 @@ public class Book extends TitledEntity {
 		if (!force && myId != -1 && myIsSaved) {
 			return false;
 		}
+
 		database.executeAsTransaction(new Runnable() {
 			public void run() {
 				if (myId >= 0) {
