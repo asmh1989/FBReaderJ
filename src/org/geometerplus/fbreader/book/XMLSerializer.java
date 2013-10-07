@@ -444,8 +444,7 @@ class XMLSerializer extends AbstractSerializer {
 		private final StringBuilder mySeriesTitle = new StringBuilder();
 		private final StringBuilder mySeriesIndex = new StringBuilder();
 		private boolean myHasBookmark;
-		private long myProgressNumerator;
-		private long myProgressDenominator;
+		private RationalNumber myProgress;
 
 		private Book myBook;
 
@@ -470,8 +469,7 @@ class XMLSerializer extends AbstractSerializer {
 			myTags.clear();
 			myLabels.clear();
 			myHasBookmark = false;
-			myProgressNumerator = 0;
-			myProgressDenominator = 1;
+			myProgress = null;
 
 			myState = State.READ_NOTHING;
 		}
@@ -503,7 +501,7 @@ class XMLSerializer extends AbstractSerializer {
 			myBook.setSeriesInfoWithNoCheck(string(mySeriesTitle), string(mySeriesIndex));
 			myBook.HasBookmark = myHasBookmark;
 			
-			myBook.setProgress(new RationalNumber(myProgressNumerator, myProgressDenominator));
+			myBook.setProgress(myProgress);
 		}
 
 		@Override
@@ -551,8 +549,10 @@ class XMLSerializer extends AbstractSerializer {
 						// TODO: use "rel" attribute
 						myUrl = attributes.getValue("href");
 					} else if ("position".equals(localName)) {
-						myProgressNumerator = Long.valueOf(attributes.getValue("numerator"));
-						myProgressDenominator = Long.valueOf(attributes.getValue("denominator"));
+						myProgress = new RationalNumber(
+							Long.valueOf(attributes.getValue("numerator")),
+							Long.valueOf(attributes.getValue("denominator"))
+						);
 					} else {
 						throw new SAXException("Unexpected tag " + localName);
 					}

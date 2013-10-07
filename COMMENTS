@@ -1,1 +1,2 @@
 * Never call same getter twice, even if you know its call very light; method could be changed in future (book.getProgress() called 3 times in XMLSerializer)
+* Why to have 2 fields (numerator, denominator) in XMLSerializer when 1 (rational) is enough?
