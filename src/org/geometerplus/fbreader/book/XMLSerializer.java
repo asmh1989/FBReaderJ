@@ -228,11 +228,13 @@ class XMLSerializer extends AbstractSerializer {
 			"rel", "http://opds-spec.org/acquisition"
 		);
 
-		if (null != book.getProgress()) {
+		final RationalNumber progress = book.getProgress();
+		if (progress != null) {
 			appendTag(
-					buffer, "position", true,
-					"numerator", Long.toString(book.getProgress().Numerator),
-					"denominator", Long.toString(book.getProgress().Denominator));
+				buffer, "position", true,
+				"numerator", Long.toString(progress.Numerator),
+				"denominator", Long.toString(progress.Denominator)
+			);
 		}
 	
 		closeTag(buffer, "entry");
