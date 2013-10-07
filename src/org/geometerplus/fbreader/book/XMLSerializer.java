@@ -236,7 +236,7 @@ class XMLSerializer extends AbstractSerializer {
 				"denominator", Long.toString(progress.Denominator)
 			);
 		}
-	
+
 		closeTag(buffer, "entry");
 	}
 
@@ -549,10 +549,13 @@ class XMLSerializer extends AbstractSerializer {
 						// TODO: use "rel" attribute
 						myUrl = attributes.getValue("href");
 					} else if ("progress".equals(localName)) {
-						myProgress = RationalNumber.create(
-							Long.valueOf(attributes.getValue("numerator")),
-							Long.valueOf(attributes.getValue("denominator"))
-						);
+						try {
+							myProgress = RationalNumber.create(
+								Long.parseLong(attributes.getValue("numerator")),
+								Long.parseLong(attributes.getValue("denominator"))
+							);
+						} catch (NumberFormatException e) {
+						}
 					} else {
 						throw new SAXException("Unexpected tag " + localName);
 					}
