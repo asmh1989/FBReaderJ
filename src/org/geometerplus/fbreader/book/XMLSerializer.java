@@ -549,7 +549,7 @@ class XMLSerializer extends AbstractSerializer {
 						// TODO: use "rel" attribute
 						myUrl = attributes.getValue("href");
 					} else if ("position".equals(localName)) {
-						myProgress = new RationalNumber(
+						myProgress = RationalNumber.create(
 							Long.valueOf(attributes.getValue("numerator")),
 							Long.valueOf(attributes.getValue("denominator"))
 						);

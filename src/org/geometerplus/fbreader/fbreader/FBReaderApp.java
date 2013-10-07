@@ -432,12 +432,9 @@ public final class FBReaderApp extends ZLApplication {
 	}
 
 	public void saveProgress() {
-		final FBView view = getTextView();
-		final PagePosition pagePosition = view.pagePosition();
-		final long numerator = pagePosition.Current;
-		final long denominator = pagePosition.Total;
 		if (Model != null && Model.Book != null) {
-			Model.Book.setProgress(new RationalNumber(numerator, denominator));
+			final PagePosition pagePosition = getTextView().pagePosition();
+			Model.Book.setProgress(RationalNumber.create(pagePosition.Current, pagePosition.Total));
 			Collection.saveBook(Model.Book, false);
 		}
 	}

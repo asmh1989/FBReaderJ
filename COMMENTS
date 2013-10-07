@@ -1,2 +1,3 @@
-* Never call same getter twice, even if you know its call very light; method could be changed in future (book.getProgress() called 3 times in XMLSerializer)
+* Never call same getter twice, even if you know its call very light; method could be changed in future (book.getProgress() called 3 times in XMLSerializer).
 * Why to have 2 fields (numerator, denominator) in XMLSerializer when 1 (rational) is enough?
+* RationalNumber constructor returns zero if denominator == 0. Why? This is incorrect input value so it shoud throw an exception or (implemented now) return null.

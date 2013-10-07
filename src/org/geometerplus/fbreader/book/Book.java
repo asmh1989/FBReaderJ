@@ -479,7 +479,7 @@ public class Book extends TitledEntity {
 				for (UID uid : uids()) {
 					database.saveBookUid(myId, uid);
 				}
-				if (null != myProgress) {
+				if (myProgress != null) {
 					database.saveProgress(myId, myProgress);
 				}
 			}
