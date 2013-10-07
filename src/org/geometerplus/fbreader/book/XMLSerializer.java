@@ -231,7 +231,7 @@ class XMLSerializer extends AbstractSerializer {
 		final RationalNumber progress = book.getProgress();
 		if (progress != null) {
 			appendTag(
-				buffer, "position", true,
+				buffer, "progress", true,
 				"numerator", Long.toString(progress.Numerator),
 				"denominator", Long.toString(progress.Denominator)
 			);
@@ -548,7 +548,7 @@ class XMLSerializer extends AbstractSerializer {
 					} else if ("link".equals(localName)) {
 						// TODO: use "rel" attribute
 						myUrl = attributes.getValue("href");
-					} else if ("position".equals(localName)) {
+					} else if ("progress".equals(localName)) {
 						myProgress = RationalNumber.create(
 							Long.valueOf(attributes.getValue("numerator")),
 							Long.valueOf(attributes.getValue("denominator"))
