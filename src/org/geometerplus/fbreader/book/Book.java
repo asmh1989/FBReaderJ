@@ -87,8 +87,8 @@ public class Book extends TitledEntity {
 		myTags = book.myTags != null ? new ArrayList<Tag>(book.myTags) : null;
 		myLabels = book.myLabels != null ? new ArrayList<String>(book.myLabels) : null;
 		mySeriesInfo = book.mySeriesInfo;
-		HasBookmark = book.HasBookmark;
 		myProgress = book.myProgress;
+		HasBookmark = book.HasBookmark;
 	}
 
 	public void reloadInfoFromFile() {
@@ -278,15 +278,6 @@ public class Book extends TitledEntity {
 		}
 	}
 
-	public RationalNumber getProgress() {
-		return myProgress;
-	}
-	
-	public void setProgress(RationalNumber progress) {
-		myProgress = progress;
-		myIsSaved = false;
-	}
-	
 	public String getEncoding() {
 		if (myEncoding == null) {
 			try {
@@ -407,6 +398,15 @@ public class Book extends TitledEntity {
 		return myUids.contains(uid);
 	}
 
+	public RationalNumber getProgress() {
+		return myProgress;
+	}
+
+	public void setProgress(RationalNumber progress) {
+		myProgress = progress;
+		myIsSaved = false;
+	}
+	
 	public boolean matches(String pattern) {
 		if (MiscUtil.matchesIgnoreCase(getTitle(), pattern)) {
 			return true;
