@@ -150,8 +150,8 @@ public class Book extends TitledEntity {
 		myLabels = database.listLabels(myId);
 		mySeriesInfo = database.getSeriesInfo(myId);
 		myUids = database.listUids(myId);
+		myProgress = database.getProgress(myId);
 		HasBookmark = database.hasVisibleBookmark(myId);
-		myProgress = database.loadProgress(myId);
 		myIsSaved = true;
 		if (myUids == null || myUids.isEmpty()) {
 			try {
@@ -406,7 +406,7 @@ public class Book extends TitledEntity {
 		myProgress = progress;
 		myIsSaved = false;
 	}
-	
+
 	public boolean matches(String pattern) {
 		if (MiscUtil.matchesIgnoreCase(getTitle(), pattern)) {
 			return true;
@@ -479,7 +479,7 @@ public class Book extends TitledEntity {
 					database.saveBookUid(myId, uid);
 				}
 				if (myProgress != null) {
-					database.saveProgress(myId, myProgress);
+					database.saveBookProgress(myId, myProgress);
 				}
 			}
 		});
