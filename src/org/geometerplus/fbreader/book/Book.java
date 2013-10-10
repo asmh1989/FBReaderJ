@@ -406,6 +406,10 @@ public class Book extends TitledEntity {
 		myProgress = progress;
 		myIsSaved = false;
 	}
+	
+	public void setProgressWithNoCheck(RationalNumber progress) {
+		myProgress = progress;
+	}
 
 	public boolean matches(String pattern) {
 		if (MiscUtil.matchesIgnoreCase(getTitle(), pattern)) {
