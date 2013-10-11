@@ -501,7 +501,7 @@ class XMLSerializer extends AbstractSerializer {
 			myBook.setSeriesInfoWithNoCheck(string(mySeriesTitle), string(mySeriesIndex));
 			myBook.HasBookmark = myHasBookmark;
 			
-			myBook.setProgress(myProgress);
+			myBook.setProgressWithNoCheck(myProgress);
 		}
 
 		@Override
