@@ -316,8 +316,6 @@ public final class FBReaderApp extends ZLApplication {
 		onViewChanged();
 
 		storePosition();
-		saveProgress();
-		
 		BookTextView.setModel(null);
 		FootnoteView.setModel(null);
 		clearTextCaches();
@@ -421,22 +419,16 @@ public final class FBReaderApp extends ZLApplication {
 
 	public void onWindowClosing() {
 		storePosition();
-		saveProgress();
 	}
 
 	public void storePosition() {
 		if (Model != null && Model.Book != null && BookTextView != null) {
 			Collection.storePosition(Model.Book.getId(), BookTextView.getStartCursor());
-		}
-	}
-
-	public void saveProgress() {
-		if (Model != null && Model.Book != null) {
-			Model.Book.setProgress(getTextView().getProgress());
+			Model.Book.setProgress(BookTextView.getProgress());
 			Collection.saveBook(Model.Book, false);
 		}
 	}
-	
+
 	static enum CancelActionType {
 		library,
 		networkLibrary,
